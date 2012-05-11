@@ -1,0 +1,15 @@
+div.canvas{
+	background-color: #C3D9FF; /* Gmail blue */
+	width: 600px;
+	height: 400px;
+}
+
+div.note{
+	background-color: #FFFF88; /* Interactive action yellow */
+	width: 150px;
+	height: 150px;
+}
+
+div.note span{
+	text-align: center;
+}
