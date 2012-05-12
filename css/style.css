@@ -2,6 +2,9 @@ div.canvas{
 	background-color: #C3D9FF; /* Gmail blue */
 	width: 800px;
 	height: 600px;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	border-radius: 8px;
 }
 
 div.note{

@@ -12,7 +12,17 @@
 	<script>
 		var theta = 10;
 
-		
+
+		function create_note(){
+			var div = $(document.createElement('div'));
+        	var span = $(document.createElement('span'));
+        	$(div).addClass('note ui-draggable');
+        	$(span).addClass('text');
+        	$(span).html('Some idea');
+        	$(div).append(span);
+        	return div;
+		}
+
 		function note_binding(note){
 			$(note).data('angle' , 0);
 			$(note).draggable({ containment: ".canvas", scroll: false });
@@ -25,23 +35,9 @@
 		}
 
 		$(function() {
-			
-
-			$('.note').data('angle' , 0);
-			$('.note').draggable({ containment: ".canvas", scroll: false });
-			$('.note').bind('mousewheel', function(event, delta) {
-            	var old = $(this).data('angle');
-            	$(this).data('angle', old + theta*delta*(-1));
-            	$(this).css('-moz-transform', 'rotate('+ $(this).data('angle') +'deg)');
-            	$(this).css('-webkit-transform', 'rotate('+ $(this).data('angle') +'deg)');
-        	});
+			note_binding('.note');
         	$('.canvas').dblclick(function(){ 
-        		var div = $(document.createElement('div'));
-        		var span = $(document.createElement('span'));
-        		$(div).addClass('note ui-draggable');
-        		$(span).addClass('text');
-        		$(span).html('Some idea');
-        		$(div).append(span);
+        		var div = create_note();
         		$(this).append(div);
         		note_binding(div);
         		});
