@@ -1,13 +1,33 @@
 div.canvas{
 	background-color: #C3D9FF; /* Gmail blue */
-	width: 600px;
-	height: 400px;
+	width: 800px;
+	height: 600px;
 }
 
 div.note{
 	background-color: #FFFF88; /* Interactive action yellow */
-	width: 150px;
-	height: 150px;
+	width: 160px;
+	height: 160px;
+	font-family: Arial;
+	font-size: 18px;
+	text-align: center;
+}
+
+div.note span.text{
+	margin: auto;
+	vertical-align: middle;
+	text-align: center;
+	position: absolute;
+	top: 40%;
+}
+
+.ui-draggable-dragging{
+	-webkit-box-shadow: 0 8px 6px -6px black;
+	   -moz-box-shadow: 0 8px 6px -6px black;
+	        box-shadow: 0 8px 6px -6px black;
+	/*-moz-box-shadow: 0 0 5px #888;
+	-webkit-box-shadow: 0 0 5px#888;
+	box-shadow: 0 0 5px #888;*/
 }
 
 div.note span{
