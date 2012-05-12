@@ -36,3 +36,10 @@ div.note span.text{
 div.note span{
 	text-align: center;
 }
+div.note span input/*[type=text]*/{
+	font-size:20px;
+	border: 0px solid;
+	background-color: transparent;
+	size: 10;
+	text-align: center;
+}

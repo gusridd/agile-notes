@@ -11,14 +11,17 @@
 
 	<script>
 		var theta = 10;
-
+		var new_note_text = "edit me!";
 
 		function create_note(){
 			var div = $(document.createElement('div'));
         	var span = $(document.createElement('span'));
+        	var input = $(document.createElement('input'));
         	$(div).addClass('note ui-draggable');
         	$(span).addClass('text');
-        	$(span).html('Some idea');
+        	$(input).attr('size', '10');
+        	$(input).attr('value', new_note_text);
+        	$(span).append(input);
         	$(div).append(span);
         	return div;
 		}
@@ -51,7 +54,7 @@
 
 		<div class="canvas">
 			<div class="note">
-				<span class="text">Some idea</span>
+				<span class="text"><input type="text" size="10" value="Some idea"></span>
 			</div>
 		</div>
 	</body>
