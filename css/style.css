@@ -20,6 +20,7 @@ div.note{
 	font-size: 18px;
 	text-align: center;
 	border: 1px solid #F3C138;
+	position: absolute;
 }
 
 div.note span.delete_icon{
@@ -58,6 +59,7 @@ div.note span input/*[type=text]*/{
 	border: 0px solid;
 	background-color: transparent;
 	text-align: center;
+	position: relative;
 }
 
 div.instructions{
