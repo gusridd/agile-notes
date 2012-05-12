@@ -1,3 +1,8 @@
+html,body,div,span,p,h1,h2,h3,h4,{
+	margin: 0;
+	padding: 0;
+}
+
 div.canvas{
 	background-color: #C3D9FF; /* Gmail blue */
 	width: 800px;
@@ -14,6 +19,18 @@ div.note{
 	font-family: Arial;
 	font-size: 18px;
 	text-align: center;
+	border: 1px solid #F3C138;
+}
+
+div.note span.delete_icon{
+	width:24px;
+	height:24px;
+	display: block;
+	background-image: url("../img/TWG_Retina_Icons/delete_24.png");
+	position: absolute;
+	left: 135;
+	top:2;
+	margin:0;
 }
 
 div.note span.text{
@@ -40,6 +57,12 @@ div.note span input/*[type=text]*/{
 	font-size:20px;
 	border: 0px solid;
 	background-color: transparent;
-	size: 10;
 	text-align: center;
+}
+
+div.instructions{
+	position: absolute;
+	left:800px;
+	top:100px;
+	font-size: 18px;
 }

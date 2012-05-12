@@ -14,21 +14,24 @@
 		var new_note_text = "edit me!";
 
 		function create_note(){
-			var div = $(document.createElement('div'));
-        	var span = $(document.createElement('span'));
+			var div = $(document.createElement('div')).addClass('note ui-draggable');
+        	var span = $(document.createElement('span')).addClass('text');
         	var input = $(document.createElement('input'));
-        	$(div).addClass('note ui-draggable');
-        	$(span).addClass('text');
+        	var delete_icon = $(document.createElement('span')).addClass('delete_icon');
         	$(input).attr('size', '10');
         	$(input).attr('value', new_note_text);
         	$(span).append(input);
         	$(div).append(span);
+        	$(div).append(delete_icon);
         	return div;
 		}
 
 		function note_binding(note){
 			$(note).data('angle' , 0);
 			$(note).draggable({ containment: ".canvas", scroll: false });
+			$(note).children('span.delete_icon').click(function(){
+				$(note).remove();
+			});
 			$(note).bind('mousewheel', function(event, delta) {
             	var old = $(this).data('angle');
             	$(this).data('angle', old + theta*delta*(-1));
@@ -52,9 +55,18 @@
 	<body>
 		<h1>Post-It App</h1>
 		<div class="canvas">
+			
+			<!-- BEGIN Note -->
 			<div class="note">
-				<span class="text"><input type="text" size="10" value="Some idea"></span>
+				
+				<span class="text">
+					<input type="text" size="10" value="Some idea">
+				</span>
+
+				<span class="delete_icon"></span>
 			</div>
+			<!--- END Note -->
+
 		</div>
 		<div class="instructions">
 			<ul>
