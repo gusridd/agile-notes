@@ -6,6 +6,7 @@
 		<script src="js/jquery-1.7.2.min.js" type="text/javascript"></script>
 		<script src="js/jquery-ui-1.8.20.custom.min.js" type="text/javascript"></script>
 		<script src="js/jquery-mousewheel-3.0.6/jquery.mousewheel.min.js" type="text/javascript"></script>
+		<script src="js/jquery.base64.min.js" type="text/javascript"></script>
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 	</head>
 
@@ -13,10 +14,9 @@
 		var theta = 10;
 		var new_note_text = "edit me!";
 		var floater = false;
-		var total_colors = 2;
+		var on_note = false;
 		var colors = {	1:"yellow",
 						2:"pink"	};
-		var colors_array = $.makeArray(colors);
 		var total_colors = Object.keys(colors).length;
 
 		function page_scroll_avoid(){
@@ -43,6 +43,33 @@
 			
 		}
 
+		function save(){
+			var html = $('.canvas').clone();
+			var htmlString = html.html();
+			var data = $.base64.encode(htmlString);
+			var datauri = "data:text/html;charset=utf-8;base64," + data;
+			$("body").append("<a href='" + datauri + "'>Save</a>");
+			$.ajax({
+				url: 'ajax_save.php',
+				type: 'POST',
+				data: { canvas: data},
+				success: function(data) {
+			    	/*$('.canvas').html(data);*/
+			    	alert('Save was performed.');
+			  	}
+			});
+		}
+
+		function load(){
+			$.ajax({
+				url: 'ajax_load.php',
+				success: function(data) {
+			    	$('.canvas').html($.base64.decode(data));
+			    	alert('Load was performed.');
+			  	}
+			});
+		}
+
 		function create_note(){
 			var div = $(document.createElement('div')).addClass('note ui-draggable yellow');
         	var span = $(document.createElement('span')).addClass('text');
@@ -52,6 +79,9 @@
         	var resize_icon = $(document.createElement('span')).addClass('resize_icon');
         	$(input).attr('size', '10');
         	$(input).attr('value', new_note_text);
+        	$(delete_icon).attr('title', "delete");
+        	$(color_icon).attr('title', "color");
+        	$(resize_icon).attr('title', "resize");
         	$(span).append(input);
         	$(div).append(span);
         	$(div).append(resize_icon);
@@ -85,10 +115,12 @@
             	$(this).css('-webkit-transform', 'rotate('+ $(this).data('angle') +'deg)');
         	});
         	$(note).mouseover(function(){
+        		on_note = true;
         		page_scroll_avoid();
         		context_show($(this));
         	});
         	$(note).mouseout(function(){
+        		on_note = false;
         		page_scroll_allow();
         		context_hide($(this));
         	});
@@ -97,29 +129,36 @@
 		$(function() {
 			note_binding('.note');
         	$('.canvas').dblclick(function(){ 
-        		var div = create_note();
-        		$(this).append(div);
-        		note_binding(div);
-        		});
+        		if(!on_note){
+        			var div = create_note();
+        			$(this).append(div);
+        			note_binding(div);
+        		}
+        	});
+        	$('span.save').click(save);
+        	$('span.load').click(load);
 		});
+
 
 	</script>	
 
 
 	<body>
 		<h1>Post-It App</h1>
-
 		<div class="canvas">
-			
+			<span class="save" title="save"></span>
+			<span class="load" title="load"></span>
+
+
 			<!-- BEGIN Note -->
 			<div class="note pink">
 				
 				<span class="text">
 					<input type="text" size="10" value="Some idea">
 				</span>
-				<span class="icon resize_icon"></span>
-				<span class="icon color_icon"></span>
-				<span class="icon delete_icon"></span>
+				<span class="icon resize_icon" title="resize"></span>
+				<span class="icon color_icon" title="color"></span>
+				<span class="icon delete_icon" title="delete"></span>
 
 			</div>
 			<!--- END Note -->
@@ -133,7 +172,6 @@
 				<li>Click a note in the center for editing</li>
 			</ul>
 		</div>
-
 	</body>
 </html>
 
