@@ -63,7 +63,6 @@
 
 		function inputs_set_attr(){
 			$.each($('input'),function(){
-				/*alert($(this).val());*/
 				$(this).attr('value', $(this).val());
 			});
 		}
@@ -74,8 +73,13 @@
 				success: function(data) {
 			    	$('.canvas').html($.base64.decode(data));
 			    	alert('Load was performed.');
+			    	$.each($('.note'),function(){
+						alert($(this).val());
+						note_binding($(this));
+					});
 			  	}
 			});
+			
 		}
 
 		function create_note(){
