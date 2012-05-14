@@ -44,6 +44,7 @@
 		}
 
 		function save(){
+			inputs_set_attr();
 			var html = $('.canvas').clone();
 			var htmlString = html.html();
 			var data = $.base64.encode(htmlString);
@@ -57,6 +58,13 @@
 			    	/*$('.canvas').html(data);*/
 			    	alert('Save was performed.');
 			  	}
+			});
+		}
+
+		function inputs_set_attr(){
+			$.each($('input'),function(){
+				/*alert($(this).val());*/
+				$(this).attr('value', $(this).val());
 			});
 		}
 
