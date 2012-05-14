@@ -12,6 +12,18 @@
 	<script>
 		var theta = 10;
 		var new_note_text = "edit me!";
+		var floater = false;
+
+		function page_scroll_avoid(){
+			$('body').css('overflow', 'hidden');
+      		$(window).scroll(function(){
+        		$(this).scrollTop(top).scrollLeft(left);
+      		});
+		}
+		function page_scroll_allow(){
+			$('body').css('overflow', 'auto');
+      		$(window).unbind('scroll');
+		}
 
 		function create_note(){
 			var div = $(document.createElement('div')).addClass('note ui-draggable');
@@ -38,6 +50,8 @@
             	$(this).css('-moz-transform', 'rotate('+ $(this).data('angle') +'deg)');
             	$(this).css('-webkit-transform', 'rotate('+ $(this).data('angle') +'deg)');
         	});
+        	$(note).mouseover(page_scroll_avoid);
+        	$(note).mouseout(page_scroll_allow);
 		}
 
 		$(function() {
