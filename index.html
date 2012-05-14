@@ -53,15 +53,13 @@
 			var html = $('.canvas').clone();
 			var htmlString = html.html();
 			var data = $.base64.encode(htmlString);
-			var datauri = "data:text/html;charset=utf-8;base64," + data;
-			$("body").append("<a href='" + datauri + "'>Save</a>");
 			$.ajax({
 				url: 'ajax_save.php',
 				type: 'POST',
 				data: { canvas: data},
 				success: function(data) {
 			    	/*$('.canvas').html(data);*/
-			    	/*alert('Save was performed.');*/
+			    	alert(data);
 			  	}
 			});
 		}
