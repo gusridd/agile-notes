@@ -43,6 +43,11 @@
 			
 		}
 
+		function save_load_binding(){
+			$('span.save').click(save);
+        	$('span.load').click(load);
+		}
+
 		function save(){
 			inputs_set_attr();
 			var html = $('.canvas').clone();
@@ -56,7 +61,7 @@
 				data: { canvas: data},
 				success: function(data) {
 			    	/*$('.canvas').html(data);*/
-			    	alert('Save was performed.');
+			    	/*alert('Save was performed.');*/
 			  	}
 			});
 		}
@@ -72,10 +77,11 @@
 				url: 'ajax_load.php',
 				success: function(data) {
 			    	$('.canvas').html($.base64.decode(data));
-			    	alert('Load was performed.');
+			    	/*alert('Load was performed.');*/
 			    	$.each($('.note'),function(){
 						note_binding($(this));
 					});
+					save_load_binding();
 			  	}
 			});
 			
@@ -146,6 +152,7 @@
         			note_binding(div);
         		}
         	});
+        	save_load_binding();
         	$('span.save').click(save);
         	$('span.load').click(load);
 		});
