@@ -50,6 +50,7 @@
 
 		function save(){
 			inputs_set_attr();
+			textarea_set_placeholder();
 			var html = $('.canvas').clone();
 			var htmlString = html.html();
 			var data = $.base64.encode(htmlString);
@@ -58,7 +59,6 @@
 				type: 'POST',
 				data: { canvas: data},
 				success: function(data) {
-			    	/*$('.canvas').html(data);*/
 			    	alert(data);
 			  	}
 			});
@@ -70,12 +70,17 @@
 			});
 		}
 
+		function textarea_set_placeholder(){
+			$.each($('textarea'),function(){
+				$(this).html($(this).val());
+			});
+		}
+
 		function load(){
 			$.ajax({
 				url: 'ajax_load.php',
 				success: function(data) {
 			    	$('.canvas').html($.base64.decode(data));
-			    	/*alert('Load was performed.');*/
 			    	$.each($('.note'),function(){
 						note_binding($(this));
 					});
@@ -100,6 +105,7 @@
 			var div = $(document.createElement('div')).addClass('note ui-draggable yellow');
         	var span = $(document.createElement('span')).addClass('text');
         	var input = $(document.createElement('input'));
+        	var textarea = $(document.createElement('textarea'));
         	var delete_icon = $(document.createElement('span')).addClass('delete_icon');
         	var color_icon = $(document.createElement('span')).addClass('color_icon');
         	var resize_icon = $(document.createElement('span')).addClass('resize_icon');
@@ -108,7 +114,8 @@
         	$(delete_icon).attr('title', "delete");
         	$(color_icon).attr('title', "color");
         	$(resize_icon).attr('title', "resize");
-        	$(span).append(input);
+        	/*$(span).append(input);*/
+        	$(span).append(textarea);
         	$(div).append(span);
         	$(div).append(resize_icon);
         	$(div).append(color_icon);
@@ -183,7 +190,8 @@
 			<div class="note pink">
 				
 				<span class="text">
-					<input type="text" size="10" value="Some idea">
+					<!--<input type="text" size="10" value="Some idea">-->
+					<textarea rows="4" cols="8" class="area">Nota</textarea>
 				</span>
 				<span class="icon resize_icon" title="resize"></span>
 				<span class="icon color_icon" title="color"></span>
