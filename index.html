@@ -79,10 +79,21 @@
 			    	$.each($('.note'),function(){
 						note_binding($(this));
 					});
+					canvas_binding();
 					save_load_binding();
 			  	}
 			});
 			
+		}
+
+		function canvas_binding(){
+        	$('.canvas').dblclick(function(){ 
+        		if(!on_note){
+        			var div = create_note();
+        			$(this).append(div);
+        			note_binding(div);
+        		}
+        	});
 		}
 
 		function create_note(){
@@ -140,6 +151,8 @@
         		context_hide($(this));
         	});
 		}
+
+
 
 		$(function() {
 			note_binding('.note');
