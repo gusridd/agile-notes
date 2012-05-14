@@ -13,6 +13,11 @@
 		var theta = 10;
 		var new_note_text = "edit me!";
 		var floater = false;
+		var total_colors = 2;
+		var colors = {	1:"yellow",
+						2:"pink"	};
+		var colors_array = $.makeArray(colors);
+		var total_colors = Object.keys(colors).length;
 
 		function page_scroll_avoid(){
 			$('body').css('overflow', 'hidden');
@@ -27,30 +32,50 @@
 
 		function context_show(note){
 			$(note).children('span.delete_icon').show();
+			$(note).children('span.color_icon').show();
+			$(note).children('span.resize_icon').show();
 		}
 
 		function context_hide(note){
 			$(note).children('span.delete_icon').hide();
+			$(note).children('span.color_icon').hide();
+			$(note).children('span.resize_icon').hide();
 			
 		}
 
 		function create_note(){
-			var div = $(document.createElement('div')).addClass('note ui-draggable');
+			var div = $(document.createElement('div')).addClass('note ui-draggable yellow');
         	var span = $(document.createElement('span')).addClass('text');
         	var input = $(document.createElement('input'));
         	var delete_icon = $(document.createElement('span')).addClass('delete_icon');
+        	var color_icon = $(document.createElement('span')).addClass('color_icon');
+        	var resize_icon = $(document.createElement('span')).addClass('resize_icon');
         	$(input).attr('size', '10');
         	$(input).attr('value', new_note_text);
         	$(span).append(input);
         	$(div).append(span);
+        	$(div).append(resize_icon);
+        	$(div).append(color_icon);
         	$(div).append(delete_icon);
         	return div;
 		}
 
 		function note_binding(note){
 			$(note).data('angle' , 0);
+			$(note).data('color' , 0);
 			$(note).draggable({ containment: ".canvas", scroll: false });
 			$(note).children('span.delete_icon').click(function(){
+				$(note).remove();
+			});
+			$(note).children('span.color_icon').click(function(){
+				$.each(colors,function(){
+					$(note).removeClass(this.toString());
+				});
+				var color = ($(note).data('color') + 1)%(total_colors);
+				$(note).data('color' , color);
+				$(note).addClass(colors[color+1]);
+			});
+			$(note).children('span.resize_icon').click(function(){
 				$(note).remove();
 			});
 			$(note).bind('mousewheel', function(event, delta) {
@@ -86,13 +111,15 @@
 		<div class="canvas">
 			
 			<!-- BEGIN Note -->
-			<div class="note">
+			<div class="note pink">
 				
 				<span class="text">
 					<input type="text" size="10" value="Some idea">
 				</span>
+				<span class="icon resize_icon"></span>
+				<span class="icon color_icon"></span>
+				<span class="icon delete_icon"></span>
 
-				<span class="delete_icon"></span>
 			</div>
 			<!--- END Note -->
 
