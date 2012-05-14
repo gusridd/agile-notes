@@ -104,8 +104,12 @@ div.instructions{
 div.yellow{
 	background-color: #FFFF88; /* Interactive action yellow */
 }
+
 div.pink{
 	background-color: #FF0084; /* Flickr Pink */
 	border-color: #fb00ff;
 	color: #fffb00;
+}
+div.pink span.delete_icon{
+	background-image: url("../img/TWG_Retina_Icons/delete_24_yellow.png");
 }
