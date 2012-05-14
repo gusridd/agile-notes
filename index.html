@@ -13,10 +13,9 @@
 		var theta = 10;
 		var new_note_text = "edit me!";
 		var floater = false;
-		var total_colors = 2;
+		var on_note = false;
 		var colors = {	1:"yellow",
 						2:"pink"	};
-		var colors_array = $.makeArray(colors);
 		var total_colors = Object.keys(colors).length;
 
 		function page_scroll_avoid(){
@@ -85,10 +84,12 @@
             	$(this).css('-webkit-transform', 'rotate('+ $(this).data('angle') +'deg)');
         	});
         	$(note).mouseover(function(){
+        		on_note = true;
         		page_scroll_avoid();
         		context_show($(this));
         	});
         	$(note).mouseout(function(){
+        		on_note = false;
         		page_scroll_allow();
         		context_hide($(this));
         	});
@@ -97,9 +98,11 @@
 		$(function() {
 			note_binding('.note');
         	$('.canvas').dblclick(function(){ 
-        		var div = create_note();
-        		$(this).append(div);
-        		note_binding(div);
+        		if(!on_note){
+        			var div = create_note();
+        			$(this).append(div);
+        			note_binding(div);
+        		}
         		});
 		});
 
