@@ -25,6 +25,15 @@
       		$(window).unbind('scroll');
 		}
 
+		function context_show(note){
+			$(note).children('span.delete_icon').show();
+		}
+
+		function context_hide(note){
+			$(note).children('span.delete_icon').hide();
+			
+		}
+
 		function create_note(){
 			var div = $(document.createElement('div')).addClass('note ui-draggable');
         	var span = $(document.createElement('span')).addClass('text');
@@ -50,8 +59,14 @@
             	$(this).css('-moz-transform', 'rotate('+ $(this).data('angle') +'deg)');
             	$(this).css('-webkit-transform', 'rotate('+ $(this).data('angle') +'deg)');
         	});
-        	$(note).mouseover(page_scroll_avoid);
-        	$(note).mouseout(page_scroll_allow);
+        	$(note).mouseover(function(){
+        		page_scroll_avoid();
+        		context_show($(this));
+        	});
+        	$(note).mouseout(function(){
+        		page_scroll_allow();
+        		context_hide($(this));
+        	});
 		}
 
 		$(function() {
