@@ -42,8 +42,12 @@ div.note{
 	font-family: Arial;
 	font-size: 18px;
 	text-align: center;
-	border: 1px solid #F3C138;
+	/*border: 1px solid #F3C138;*/
 	/*position: absolute;*/
+
+	-moz-box-shadow: inset 0 0 5px #888;
+	-webkit-box-shadow: inset 0 0 5px#888;
+	box-shadow: inner 0 0 5px #888;
 }
 
 div.note span.delete_icon{
@@ -94,9 +98,14 @@ div.note span.text{
 }
 
 .ui-draggable-dragging{
-	-webkit-box-shadow: 0 8px 6px -6px black;
+	/*-webkit-box-shadow: 0 8px 6px -6px black;
 	   -moz-box-shadow: 0 8px 6px -6px black;
-	        box-shadow: 0 8px 6px -6px black;
+	        box-shadow: 0 8px 6px -6px black;*/
+
+	-moz-box-shadow: 0 0 3px 3px #888;
+	-webkit-box-shadow: 0 0 3px 3px#888;
+	box-shadow: 0 0 3px 3px #888;
+
 	/*-moz-box-shadow: 0 0 5px #888;
 	-webkit-box-shadow: 0 0 5px#888;
 	box-shadow: 0 0 5px #888;*/
@@ -113,6 +122,25 @@ div.note span input/*[type=text]*/{
 	position: relative;
 	color: inherit;
 	font-weight:bold;
+}
+
+div.note textarea{
+	font-size:20px;
+	border: 0px solid;
+	background-color: transparent;
+	text-align: center;
+	position: absolute;
+	width:100px;
+	height:100px;
+	left:-50px;
+	top:-30px;
+	color: inherit;
+	font-weight:bold;
+	outline: none;
+	resize:none;
+	padding: 1px auto;
+	vertical-align:middle;
+	overflow: auto;
 }
 
 div.instructions{

@@ -43,37 +43,92 @@
 			
 		}
 
+<<<<<<< HEAD
 		function save(){
 			var html = $('.canvas').clone();
 			var htmlString = html.html();
 			var data = $.base64.encode(htmlString);
 			var datauri = "data:text/html;charset=utf-8;base64," + data;
 			$("body").append("<a href='" + datauri + "'>Save</a>");
+=======
+		function save_load_binding(){
+			$('span.save').click(save);
+        	$('span.load').click(load);
+		}
+
+		function save(){
+			inputs_set_attr();
+			textarea_set_placeholder();
+			var html = $('.canvas').clone();
+			var htmlString = html.html();
+			var data = $.base64.encode(htmlString);
+>>>>>>> 52b1bf74b1c5e2360f119008af703498aa899dd5
 			$.ajax({
 				url: 'ajax_save.php',
 				type: 'POST',
 				data: { canvas: data},
 				success: function(data) {
+<<<<<<< HEAD
 			    	/*$('.canvas').html(data);*/
 			    	alert('Save was performed.');
+=======
+			    	alert(data);
+>>>>>>> 52b1bf74b1c5e2360f119008af703498aa899dd5
 			  	}
 			});
 		}
 
+<<<<<<< HEAD
+=======
+		function inputs_set_attr(){
+			$.each($('input'),function(){
+				$(this).attr('value', $(this).val());
+			});
+		}
+
+		function textarea_set_placeholder(){
+			$.each($('textarea'),function(){
+				$(this).html($(this).val());
+			});
+		}
+
+>>>>>>> 52b1bf74b1c5e2360f119008af703498aa899dd5
 		function load(){
 			$.ajax({
 				url: 'ajax_load.php',
 				success: function(data) {
 			    	$('.canvas').html($.base64.decode(data));
+<<<<<<< HEAD
 			    	alert('Load was performed.');
 			  	}
 			});
+=======
+			    	$.each($('.note'),function(){
+						note_binding($(this));
+					});
+					canvas_binding();
+					save_load_binding();
+			  	}
+			});
+			
+		}
+
+		function canvas_binding(){
+        	$('.canvas').dblclick(function(){ 
+        		if(!on_note){
+        			var div = create_note();
+        			$(this).append(div);
+        			note_binding(div);
+        		}
+        	});
+>>>>>>> 52b1bf74b1c5e2360f119008af703498aa899dd5
 		}
 
 		function create_note(){
 			var div = $(document.createElement('div')).addClass('note ui-draggable yellow');
         	var span = $(document.createElement('span')).addClass('text');
         	var input = $(document.createElement('input'));
+        	var textarea = $(document.createElement('textarea'));
         	var delete_icon = $(document.createElement('span')).addClass('delete_icon');
         	var color_icon = $(document.createElement('span')).addClass('color_icon');
         	var resize_icon = $(document.createElement('span')).addClass('resize_icon');
@@ -82,9 +137,14 @@
         	$(delete_icon).attr('title', "delete");
         	$(color_icon).attr('title', "color");
         	$(resize_icon).attr('title', "resize");
+<<<<<<< HEAD
         	$(span).append(input);
+=======
+        	/*$(span).append(input);*/
+        	$(span).append(textarea);
+>>>>>>> 52b1bf74b1c5e2360f119008af703498aa899dd5
         	$(div).append(span);
-        	$(div).append(resize_icon);
+        	//$(div).append(resize_icon);
         	$(div).append(color_icon);
         	$(div).append(delete_icon);
         	return div;
@@ -126,6 +186,8 @@
         	});
 		}
 
+
+
 		$(function() {
 			note_binding('.note');
         	$('.canvas').dblclick(function(){ 
@@ -135,6 +197,10 @@
         			note_binding(div);
         		}
         	});
+<<<<<<< HEAD
+=======
+        	save_load_binding();
+>>>>>>> 52b1bf74b1c5e2360f119008af703498aa899dd5
         	$('span.save').click(save);
         	$('span.load').click(load);
 		});
@@ -154,9 +220,14 @@
 			<div class="note pink">
 				
 				<span class="text">
-					<input type="text" size="10" value="Some idea">
+					<!--<input type="text" size="10" value="Some idea">-->
+					<textarea rows="4" cols="8" class="area">Nota</textarea>
 				</span>
+<<<<<<< HEAD
 				<span class="icon resize_icon" title="resize"></span>
+=======
+				<!--<span class="icon resize_icon" title="resize"></span>-->
+>>>>>>> 52b1bf74b1c5e2360f119008af703498aa899dd5
 				<span class="icon color_icon" title="color"></span>
 				<span class="icon delete_icon" title="delete"></span>
 
