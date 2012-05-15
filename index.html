@@ -43,14 +43,6 @@
 			
 		}
 
-<<<<<<< HEAD
-		function save(){
-			var html = $('.canvas').clone();
-			var htmlString = html.html();
-			var data = $.base64.encode(htmlString);
-			var datauri = "data:text/html;charset=utf-8;base64," + data;
-			$("body").append("<a href='" + datauri + "'>Save</a>");
-=======
 		function save_load_binding(){
 			$('span.save').click(save);
         	$('span.load').click(load);
@@ -62,24 +54,15 @@
 			var html = $('.canvas').clone();
 			var htmlString = html.html();
 			var data = $.base64.encode(htmlString);
->>>>>>> 52b1bf74b1c5e2360f119008af703498aa899dd5
 			$.ajax({
 				url: 'ajax_save.php',
 				type: 'POST',
 				data: { canvas: data},
 				success: function(data) {
-<<<<<<< HEAD
-			    	/*$('.canvas').html(data);*/
-			    	alert('Save was performed.');
-=======
 			    	alert(data);
->>>>>>> 52b1bf74b1c5e2360f119008af703498aa899dd5
 			  	}
 			});
 		}
-
-<<<<<<< HEAD
-=======
 		function inputs_set_attr(){
 			$.each($('input'),function(){
 				$(this).attr('value', $(this).val());
@@ -92,17 +75,11 @@
 			});
 		}
 
->>>>>>> 52b1bf74b1c5e2360f119008af703498aa899dd5
 		function load(){
 			$.ajax({
 				url: 'ajax_load.php',
 				success: function(data) {
 			    	$('.canvas').html($.base64.decode(data));
-<<<<<<< HEAD
-			    	alert('Load was performed.');
-			  	}
-			});
-=======
 			    	$.each($('.note'),function(){
 						note_binding($(this));
 					});
@@ -121,7 +98,6 @@
         			note_binding(div);
         		}
         	});
->>>>>>> 52b1bf74b1c5e2360f119008af703498aa899dd5
 		}
 
 		function create_note(){
@@ -137,12 +113,8 @@
         	$(delete_icon).attr('title', "delete");
         	$(color_icon).attr('title', "color");
         	$(resize_icon).attr('title', "resize");
-<<<<<<< HEAD
-        	$(span).append(input);
-=======
         	/*$(span).append(input);*/
         	$(span).append(textarea);
->>>>>>> 52b1bf74b1c5e2360f119008af703498aa899dd5
         	$(div).append(span);
         	//$(div).append(resize_icon);
         	$(div).append(color_icon);
@@ -197,10 +169,7 @@
         			note_binding(div);
         		}
         	});
-<<<<<<< HEAD
-=======
         	save_load_binding();
->>>>>>> 52b1bf74b1c5e2360f119008af703498aa899dd5
         	$('span.save').click(save);
         	$('span.load').click(load);
 		});
@@ -223,11 +192,7 @@
 					<!--<input type="text" size="10" value="Some idea">-->
 					<textarea rows="4" cols="8" class="area">Nota</textarea>
 				</span>
-<<<<<<< HEAD
-				<span class="icon resize_icon" title="resize"></span>
-=======
 				<!--<span class="icon resize_icon" title="resize"></span>-->
->>>>>>> 52b1bf74b1c5e2360f119008af703498aa899dd5
 				<span class="icon color_icon" title="color"></span>
 				<span class="icon delete_icon" title="delete"></span>
 
